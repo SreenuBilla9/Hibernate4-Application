@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.banking.retail.dao.dto.UserDetailsDTO" table="USERDETAILS">
+		<cache usage="read-write" region="userdetails" />
+
+		<id name="username" column="username" type="string">
+			<generator class="foreign">
+				<param name="property">userDTO</param>
+			</generator>
+		</id>
+
+		<property name="userpwd" column="userpwd" type="string" />
+		<property name="userrole" column="userrole" type="string" />
+		<property name="usertype" column="usertype" type="string" />
+
+		<property name="theme" column="theme" type="string" />
+		<property name="userlang" column="userlang" type="string" />
+		<property name="email" column="email" type="string" />
+		<property name="mobile" column="mobile" type="string" />
+
+		<property name="updatedDate" column="updatedDate" type="java.util.Date" />
+
+		<one-to-one name="userDTO" class="com.banking.retail.dao.dto.AdminUserDTO"
+			constrained="true"></one-to-one>
+
+
+	</class>
+
+
+	<query name="GET_USERS_BY_ROLE">
+        <![CDATA[from UserDetailsDTO t where t.userrole = :userrole]]>
+	</query>
+
+	<sql-query name="GET_BY_USERTYPE">
+		<return alias="UserDetailsDTO" class="com.banking.retail.dao.dto.UserDetailsDTO" />
+		 <![CDATA[select * from USERDETAILS where usertype=:usertype]]>
+	</sql-query>
+
+</hibernate-mapping>

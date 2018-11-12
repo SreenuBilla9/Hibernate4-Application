@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.banking.retail.dao.dto.AccountDTO" table="ACCOUNT">
+		<cache usage="read-write" region="account" />
+
+		<id name="accountId" column="accountId" type="long">
+			<generator class="sequence">
+				<param name="sequence">ACCOUNT_ACCOUNTNO_SEQ</param>
+			</generator>
+		</id>
+
+		<!-- <property name="username" column="username" type="string"
+			not-null="true" /> -->
+		<property name="accounttype" column="accounttype" type="string"
+			not-null="true" />
+
+		<property name="branchcode" column="branchcode" type="string"
+			not-null="true" />
+		<property name="isactive" column="isactive" type="string"
+			not-null="true" />
+		<property name="currency" column="currency" type="string"
+			not-null="true" />
+
+		<property name="opendate" column="opendate" type="java.util.Date"
+			not-null="true" />
+		<property name="closeddate" column="closeddate" type="java.util.Date" />
+
+		<many-to-one name="userDTO" class="com.banking.retail.dao.dto.AdminUserDTO"
+			fetch="select">
+			<column name="username" not-null="true" />
+		</many-to-one>
+
+	</class>
+
+	<query name="GET_ACCOUNTS_BY_ACCTYPE">
+        <![CDATA[from AccountDTO t where t.accounttype = :accounttype]]>
+	</query>
+
+	<sql-query name="GET_ACCOUNTS_BY_USERNAME_NQ">
+		<return alias="AccountDTO" class="com.banking.retail.dao.dto.AccountDTO" /> 
+		<![CDATA[select * from ACCOUNT where username=:username]]>
+	</sql-query>
+
+	<sql-query name="callAccountsStoredProcedure">
+		<return alias="AccountDTO" class="com.banking.retail.dao.dto.AccountDTO" /> 
+		<![CDATA[CALL GetAccount(:username)]]>
+	</sql-query>
+
+</hibernate-mapping>

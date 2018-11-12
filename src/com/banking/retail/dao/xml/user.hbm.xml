@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.banking.retail.dao.dto.AdminUserDTO" table="ADMINUSER">
+		<cache usage="read-write" region="ADMINUSER" />
+
+		<id name="username" column="username" type="string">
+			<generator class="assigned" />
+		</id>
+
+		<property name="firstName" column="firstName" type="string" />
+		<property name="lastName" column="lastName" type="string" />
+
+		<property name="gender" column="gender" type="string" />
+		<property name="isEnabled" column="isEnabled" type="string" />
+		<property name="isLocked" column="isLocked" type="string" />
+
+		<property name="dateofbirth" column="dateofbirth" type="java.util.Date" />
+
+		<property name="createdate" column="createdate" type="java.util.Date" />
+		<property name="updateddate" column="updateddate" type="java.util.Date" />
+
+		<one-to-one name="userDetailsDTO" class="com.banking.retail.dao.dto.UserDetailsDTO"
+			cascade="save-update"></one-to-one>
+
+		<set name="accounts" table="ACCOUNT" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="username" not-null="true" />
+			</key>
+			<one-to-many class="com.banking.retail.dao.dto.AccountDTO" />
+		</set>
+
+	</class>
+
+
+</hibernate-mapping>
