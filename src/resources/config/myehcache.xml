@@ -10,10 +10,10 @@
 		maxElementsOnDisk="10000000" diskPersistent="false"
 		diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU" />
 
-	<cache name="user" maxElementsInMemory="10000" eternal="false"
+	<cache name="ADMINUSER" maxElementsInMemory="10000" eternal="false"
 		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true" />
 
-	<cache name="transaction" maxElementsInMemory="10000" eternal="false"
+	<cache name="userdetails" maxElementsInMemory="10000" eternal="false"
 		timeToIdleSeconds="300" timeToLiveSeconds="600" overflowToDisk="true" />
 
 	<cache name="account" maxElementsInMemory="10000" eternal="false"
