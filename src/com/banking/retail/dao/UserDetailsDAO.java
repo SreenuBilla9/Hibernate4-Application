@@ -1,6 +1,5 @@
 package com.banking.retail.dao;
 
-import com.banking.retail.dao.dto.AccountDTO;
 import com.banking.retail.dao.dto.UserDetailsDTO;
 import com.banking.retail.dao.ex.DatabaseException;
 
@@ -17,7 +16,7 @@ public interface UserDetailsDAO {
 	UserDetailsDTO load(String username) throws DatabaseException;
 
 	//
-	AccountDTO merge(UserDetailsDTO dto) throws DatabaseException;
+	UserDetailsDTO merge(UserDetailsDTO dto) throws DatabaseException;
 
 	void detach(UserDetailsDTO dto) throws DatabaseException;
 
