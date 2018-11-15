@@ -115,16 +115,4 @@ public class HibernateUserDetailsDAO implements UserDetailsDAO {
 		return userDetailsDTO;
 	}
 
-	@Override
-	public void detach(UserDetailsDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void refresh(UserDetailsDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
-
-	}
-
 }

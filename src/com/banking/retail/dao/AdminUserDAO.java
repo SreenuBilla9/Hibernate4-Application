@@ -7,7 +7,7 @@ public interface AdminUserDAO {
 
 	void insertAdminUser(AdminUserDTO dto) throws DatabaseException;
 
-	AdminUserDTO mergeAdminUser(AdminUserDTO dto) throws DatabaseException;
+	void updateAdminUser(AdminUserDTO dto) throws DatabaseException;
 
 	void deleteAdminUser(AdminUserDTO dto) throws DatabaseException;
 
@@ -15,8 +15,7 @@ public interface AdminUserDAO {
 
 	AdminUserDTO loadUserByUsername(String username) throws DatabaseException;
 
-	void detachAdminUser(AdminUserDTO dto) throws DatabaseException;
-
-	void refreshAdminUser(AdminUserDTO dto) throws DatabaseException;
+	//
+	AdminUserDTO mergeAdminUser(AdminUserDTO dto) throws DatabaseException;
 
 }

@@ -18,8 +18,4 @@ public interface UserDetailsDAO {
 	//
 	UserDetailsDTO merge(UserDetailsDTO dto) throws DatabaseException;
 
-	void detach(UserDetailsDTO dto) throws DatabaseException;
-
-	void refresh(UserDetailsDTO dto) throws DatabaseException;
-
 }

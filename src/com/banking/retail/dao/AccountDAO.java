@@ -18,7 +18,4 @@ public interface AccountDAO {
 	//
 	AccountDTO merge(AccountDTO dto) throws DatabaseException;
 
-	void detach(AccountDTO dto) throws DatabaseException;
-
-	void refresh(AccountDTO dto) throws DatabaseException;
 }

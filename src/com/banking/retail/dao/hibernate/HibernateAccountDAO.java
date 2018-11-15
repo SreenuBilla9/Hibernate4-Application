@@ -32,19 +32,42 @@ public class HibernateAccountDAO implements AccountDAO {
 
 	@Override
 	public void update(AccountDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
-	}
+		Session session = null;
+		Transaction tx = null;
 
-	@Override
-	public AccountDTO merge(AccountDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			session = HibernateUtil.getOracleSession();
+			tx = session.getTransaction();
+			tx.begin();
+			session.update(dto);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
 	}
 
 	@Override
 	public void delete(AccountDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
+		Session session = null;
+		Transaction tx = null;
 
+		try {
+			session = HibernateUtil.getOracleSession();
+			tx = session.getTransaction();
+			tx.begin();
+			session.delete(dto);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
 	}
 
 	@Override
@@ -60,20 +83,34 @@ public class HibernateAccountDAO implements AccountDAO {
 
 	@Override
 	public AccountDTO load(Long accountNo) throws DatabaseException {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = null;
+		try {
+			session = HibernateUtil.getOracleSession();
+			return (AccountDTO) session.load(AccountDTO.class, accountNo);
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
 	}
 
 	@Override
-	public void detach(AccountDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void refresh(AccountDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
-
+	public AccountDTO merge(AccountDTO dto) throws DatabaseException {
+		Session session = null;
+		Transaction tx = null;
+		AccountDTO outputDTO = null;
+		try {
+			session = HibernateUtil.getOracleSession();
+			tx = session.getTransaction();
+			tx.begin();
+			outputDTO = (AccountDTO) session.merge(dto);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+		return outputDTO;
 	}
 
 }

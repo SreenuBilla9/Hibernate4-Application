@@ -31,15 +31,43 @@ public class HibernateUserDAO implements AdminUserDAO {
 	}
 
 	@Override
-	public AdminUserDTO mergeAdminUser(AdminUserDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateAdminUser(AdminUserDTO dto) throws DatabaseException {
+		Session session = null;
+		Transaction tx = null;
+
+		try {
+			session = HibernateUtil.getOracleSession();
+			tx = session.getTransaction();
+			tx.begin();
+			session.update(dto);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
 	}
 
 	@Override
 	public void deleteAdminUser(AdminUserDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
+		Session session = null;
+		Transaction tx = null;
 
+		try {
+			session = HibernateUtil.getOracleSession();
+			tx = session.getTransaction();
+			tx.begin();
+			session.delete(dto);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
 	}
 
 	@Override
@@ -68,15 +96,23 @@ public class HibernateUserDAO implements AdminUserDAO {
 	}
 
 	@Override
-	public void detachAdminUser(AdminUserDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
-
+	public AdminUserDTO mergeAdminUser(AdminUserDTO dto) throws DatabaseException {
+		Session session = null;
+		Transaction tx = null;
+		AdminUserDTO outputDTO = null;
+		try {
+			session = HibernateUtil.getOracleSession();
+			tx = session.getTransaction();
+			tx.begin();
+			outputDTO = (AdminUserDTO) session.merge(dto);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null)
+				tx.rollback();
+			throw e;
+		} finally {
+			HibernateUtil.closeSession(session);
+		}
+		return outputDTO;
 	}
-
-	@Override
-	public void refreshAdminUser(AdminUserDTO dto) throws DatabaseException {
-		// TODO Auto-generated method stub
-
-	}
-
 }
