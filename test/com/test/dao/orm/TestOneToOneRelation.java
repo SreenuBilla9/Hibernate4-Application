@@ -1,4 +1,4 @@
-package com.test.orm;
+package com.test.dao.orm;
 
 import java.util.Date;
 

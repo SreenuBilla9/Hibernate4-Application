@@ -1,4 +1,4 @@
-package com.test.account;
+package com.test.dao.account;
 
 import java.util.Date;
 

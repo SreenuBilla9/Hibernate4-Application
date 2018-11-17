@@ -1,4 +1,4 @@
-package com.test.session;
+package com.test.dao.user;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ import com.banking.retail.dao.dto.AdminUserDTO;
 import com.banking.retail.dao.ex.DatabaseException;
 import com.banking.retail.dao.hibernate.HibernateUserDAO;
 
-public class TestSessionMethods {
+public class TestUserDAO {
 
 	private static AdminUserDAO dao = null;
 
@@ -23,11 +23,10 @@ public class TestSessionMethods {
 	}
 
 	@Test
-	@Ignore
 	public void save() {
 		AdminUserDTO dto = new AdminUserDTO();
 		try {
-			dto.setUsername("Test1234");
+			dto.setUsername("Test123");
 			dto.setFirstName("Alice");
 			dto.setLastName("Test");
 			dto.setDateofbirth(new Date());
@@ -45,7 +44,6 @@ public class TestSessionMethods {
 	}
 
 	@Test
-	@Ignore
 	public void get() {
 		try {
 			AdminUserDTO dto = dao.getUserByUsername("Test1234");
@@ -57,6 +55,7 @@ public class TestSessionMethods {
 	}
 
 	@Test
+	@Ignore
 	public void load() {
 		try {
 			AdminUserDTO dto = dao.loadUserByUsername("Test1234");
