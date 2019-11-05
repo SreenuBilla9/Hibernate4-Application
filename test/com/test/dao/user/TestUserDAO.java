@@ -68,6 +68,8 @@ public class TestUserDAO {
 
 	@AfterClass
 	public static void afterClass() {
+		//after completing task
 		dao = null;
+		
 	}
 }
